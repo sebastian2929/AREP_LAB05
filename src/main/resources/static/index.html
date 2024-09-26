@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Jugadores de Fútbol</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Gestión de Jugadores de Fútbol</h1>
+
+    <h2 class="mt-4">Agregar Jugador</h2>
+    <form id="playerForm">
+        <div class="form-group">
+            <input type="text" id="name" class="form-control" placeholder="Nombre" required>
+        </div>
+        <div class="form-group">
+            <input type="text" id="team" class="form-control" placeholder="Equipo" required>
+        </div>
+        <div class="form-group">
+            <input type="text" id="position" class="form-control" placeholder="Posición" required>
+        </div>
+        <div class="form-group">
+            <input type="number" id="age" class="form-control" placeholder="Edad" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Agregar Jugador</button>
+    </form>
+
+    <h2 class="mt-4">Lista de Jugadores</h2>
+    <ul id="playerList" class="list-group mt-3"></ul>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
