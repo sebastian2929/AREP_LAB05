@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Jugadores de Fútbol</title>
+    <title>Gestión de Propiedades Inmobiliarias</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
@@ -11,27 +11,27 @@
 </head>
 <body>
 <div class="container mt-5">
-    <h1 class="text-center">Gestión de Jugadores de Fútbol</h1>
+    <h1 class="text-center">Gestión de Propiedades Inmobiliarias</h1>
 
-    <h2 class="mt-4">Agregar Jugador</h2>
-    <form id="playerForm">
+    <h2 class="mt-4">Agregar Propiedad</h2>
+    <form id="propertyForm">
         <div class="form-group">
-            <input type="text" id="name" class="form-control" placeholder="Nombre" required>
+            <input type="text" id="address" class="form-control" placeholder="Dirección" required>
         </div>
         <div class="form-group">
-            <input type="text" id="team" class="form-control" placeholder="Equipo" required>
+            <input type="number" id="price" class="form-control" placeholder="Precio" required min="1">
         </div>
         <div class="form-group">
-            <input type="text" id="position" class="form-control" placeholder="Posición" required>
+            <input type="number" id="size" class="form-control" placeholder="Tamaño (m²)" required min="1">
         </div>
         <div class="form-group">
-            <input type="number" id="age" class="form-control" placeholder="Edad" required>
+            <textarea id="description" class="form-control" placeholder="Descripción" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Agregar Jugador</button>
+        <button type="submit" class="btn btn-primary">Agregar Propiedad</button>
     </form>
 
-    <h2 class="mt-4">Lista de Jugadores</h2>
-    <ul id="playerList" class="list-group mt-3"></ul>
+    <h2 class="mt-4">Lista de Propiedades</h2>
+    <ul id="propertyList" class="list-group mt-3"></ul>
 </div>
 
 <script src="script.js"></script>

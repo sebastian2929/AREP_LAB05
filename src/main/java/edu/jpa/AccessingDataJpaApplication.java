@@ -17,15 +17,15 @@ public class AccessingDataJpaApplication {
     }
 
     @Bean
-    public CommandLineRunner demo(FootballPlayerRepository repository) {
+    public CommandLineRunner demo(PropertyRepository repository) {
         return (args) -> {
-            // fetch all players
-            log.info("Players found with findAll():");
-            log.info("-------------------------------");
-            repository.findAll().forEach(player -> {
-                log.info(player.toString());
+            // fetch all properties
+            System.out.println("Properties found with findAll():");
+            System.out.println("-------------------------------");
+            repository.findAll().forEach(property -> {
+                System.out.println(property.toString());
             });
-            log.info("");
+            System.out.println("");
         };
     }
 }

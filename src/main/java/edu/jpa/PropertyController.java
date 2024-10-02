@@ -7,40 +7,40 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/players")
-public class FootballPlayerController {
+@RequestMapping("/properties")
+public class PropertyController {
 
     @Autowired
-    private FootballPlayerRepository repository;
+    private PropertyRepository repository;
 
     @GetMapping
-    public List<FootballPlayer> getAllPlayers() {
+    public List<Property> getAllProperties() {
         return repository.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FootballPlayer> getPlayerById(@PathVariable Long id) {
+    public ResponseEntity<Property> getPropertyById(@PathVariable Long id) {
         return repository.findById(id)
-                .map(player -> ResponseEntity.ok().body(player))
+                .map(property -> ResponseEntity.ok().body(property))
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public FootballPlayer createPlayer(@RequestBody FootballPlayer player) {
-        return repository.save(player);
+    public Property createProperty(@RequestBody Property property) {
+        return repository.save(property);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<FootballPlayer> updatePlayer(@PathVariable Long id, @RequestBody FootballPlayer player) {
+    public ResponseEntity<Property> updateProperty(@PathVariable Long id, @RequestBody Property property) {
         if (!repository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-        player.setId(id);
-        return ResponseEntity.ok(repository.save(player));
+        property.setId(id);
+        return ResponseEntity.ok(repository.save(property));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePlayer(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteProperty(@PathVariable Long id) {
         if (!repository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }

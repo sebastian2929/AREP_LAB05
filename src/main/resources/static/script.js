@@ -1,35 +1,35 @@
-const playerList = document.getElementById('playerList');
-const playerForm = document.getElementById('playerForm');
+const propertyList = document.getElementById('propertyList');
+const propertyForm = document.getElementById('propertyForm');
 
-const apiUrl = '/players';
+const apiUrl = '/properties';
 
-async function fetchPlayers() {
+async function fetchProperties() {
     const response = await fetch(apiUrl);
-    const players = await response.json();
-    displayPlayers(players);
+    const properties = await response.json();
+    displayProperties(properties);
 }
 
-function displayPlayers(players) {
-    playerList.innerHTML = '';
-    players.forEach(player => {
+function displayProperties(properties) {
+    propertyList.innerHTML = '';
+    properties.forEach(property => {
         const li = document.createElement('li');
         li.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
-        li.textContent = `${player.name} - ${player.team} - ${player.position} - ${player.age} años`;
+        li.textContent = `${property.address} - $${property.price} - ${property.size} m² - ${property.description}`;
 
         // Contenedor para los botones
         const buttonContainer = document.createElement('div');
 
         // Botón de actualización
         const updateButton = document.createElement('button');
-        updateButton.classList.add('btn', 'btn-warning', 'btn-sm', 'mr-2'); // Añadido margen a la derecha
+        updateButton.classList.add('btn', 'btn-warning', 'btn-sm', 'mr-2');
         updateButton.textContent = 'Actualizar';
-        updateButton.onclick = () => updatePlayer(player);
+        updateButton.onclick = () => updateProperty(property);
 
         // Botón de borrado
         const deleteButton = document.createElement('button');
         deleteButton.classList.add('btn', 'btn-danger', 'btn-sm');
         deleteButton.textContent = 'Borrar';
-        deleteButton.onclick = () => deletePlayer(player.id);
+        deleteButton.onclick = () => deleteProperty(property.id);
 
         // Añadir botones al contenedor
         buttonContainer.appendChild(updateButton);
@@ -37,18 +37,18 @@ function displayPlayers(players) {
 
         // Añadir el contenedor de botones a la lista
         li.appendChild(buttonContainer);
-        playerList.appendChild(li);
+        propertyList.appendChild(li);
     });
 }
 
-playerForm.addEventListener('submit', async (e) => {
+propertyForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const newPlayer = {
-        name: document.getElementById('name').value,
-        team: document.getElementById('team').value,
-        position: document.getElementById('position').value,
-        age: parseInt(document.getElementById('age').value)
+    const newProperty = {
+        address: document.getElementById('address').value,
+        price: parseFloat(document.getElementById('price').value),
+        size: parseInt(document.getElementById('size').value),
+        description: document.getElementById('description').value
     };
 
     await fetch(apiUrl, {
@@ -56,47 +56,47 @@ playerForm.addEventListener('submit', async (e) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(newPlayer)
+        body: JSON.stringify(newProperty)
     });
 
-    playerForm.reset();
-    fetchPlayers();
+    propertyForm.reset();
+    fetchProperties();
 });
 
-async function updatePlayer(player) {
-    const newName = prompt("Nuevo Nombre:", player.name);
-    const newTeam = prompt("Nuevo Equipo:", player.team);
-    const newPosition = prompt("Nueva Posición:", player.position);
-    const newAge = prompt("Nueva Edad:", player.age);
+async function updateProperty(property) {
+    const newAddress = prompt("Nueva Dirección:", property.address);
+    const newPrice = prompt("Nuevo Precio:", property.price);
+    const newSize = prompt("Nuevo Tamaño (m²):", property.size);
+    const newDescription = prompt("Nueva Descripción:", property.description);
 
-    if (newName && newTeam && newPosition && newAge) {
-        const updatedPlayer = {
-            name: newName,
-            team: newTeam,
-            position: newPosition,
-            age: parseInt(newAge)
+    if (newAddress && newPrice && newSize && newDescription) {
+        const updatedProperty = {
+            address: newAddress,
+            price: parseFloat(newPrice),
+            size: parseInt(newSize),
+            description: newDescription
         };
 
-        await fetch(`${apiUrl}/${player.id}`, {
+        await fetch(`${apiUrl}/${property.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(updatedPlayer)
+            body: JSON.stringify(updatedProperty)
         });
 
-        fetchPlayers();
+        fetchProperties();
     }
 }
 
-async function deletePlayer(id) {
-    if (confirm("¿Estás seguro de que deseas borrar este jugador?")) {
+async function deleteProperty(id) {
+    if (confirm("¿Estás seguro de que deseas borrar esta propiedad?")) {
         await fetch(`${apiUrl}/${id}`, {
             method: 'DELETE'
         });
-        fetchPlayers();
+        fetchProperties();
     }
 }
 
-// Fetch players on initial load
-fetchPlayers();
+// Fetch properties on initial load
+fetchProperties();
